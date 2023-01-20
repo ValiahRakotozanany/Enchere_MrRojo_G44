@@ -32,6 +32,7 @@ import com.example.demo.service.CategorieService;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -40,7 +41,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/Enchere")
+
 public class FicheEnchereController {
     
     @Autowired
