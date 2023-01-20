@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <body>
+        <h3>Les critères que je recherche </h3>
+        <form action="/ajoutcritere" method="post">
+            <input type="hidden" name="id"  th:value="${id}" />   
+            <th:block th:each="critere, userStatus :${critere}">
+                <div th:if="${critere.etat==1 ||critere.etat==4}">
+                    <h3 th:text="${critere.critere}"></h3>
+                    <p>Min:<input type="text" th:name="${critere.critere+userStatus.index}"/><!--  -->
+                        Max:<input type="text" th:name="${critere.critere+userStatus.index+1}"/>
+                        Coeff:<input type="text" th:name="${critere.critere}"/>                    </p>
+                </div>
+                <div th:if="${critere.etat==2}">
+                    <h4 th:text="${critere.critere}"></h4>
+                    <select  th:name="${critere.critere+userStatus.index}"/>
+                    <option value="0">Non</option>
+                    <option value="1">Oui</option>
+                    </select>
+                    Coeff : <input type="text" th:name="${critere.critere}"/>        
+                </div>
+                <div th:if="${critere.etat==3 || critere.etat==0}">
+                    <h3 th:text="${critere.critere}"></h3>                    
+                    Coeff: 
+                    <input type="text" th:name="${critere.critere}"/>                    </p>
+                </div>
+            </th:block>
+            <input type="hidden">           
+                <p><input type="submit" name="Valider"></p>
+        </form>
+    </body>
+</html>
+

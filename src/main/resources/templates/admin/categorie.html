@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+                <title> Parametres</title>
+                <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"/>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"/>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+                    <link rel="stylesheet" href="../assets/css/Login-Form-Clean.css"/>
+                    <link rel="stylesheet" href="../assets/css/MUSA_input-helper-1.css"/>
+                    <link rel="stylesheet" href="../assets/css/MUSA_input-helper.css"/>
+                    </head>
+
+                    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
+                        <div class="container"><a class="navbar-brand" href="#">GEtit</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                            <div class="collapse navbar-collapse" id="navbarResponsive">
+                                <ul class="navbar-nav ms-auto">
+                                    <li class="nav-item"><a class="nav-link" href="/">Log Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <section>
+                        <div class="bg-circle-1 bg-circle">
+                            <div class="bg-circle-3 bg-circle"></div>
+                        </div>
+                        <header class="text-center text-white pulse animated masthead">
+                            <div class="masthead-content">
+                                <div class="container">
+                                    <h1 class="masthead-heading mb-0"></h1>
+                                    <h2 class="masthead-subheading mb-0">Categorie</h2>
+                                </div>
+                            </div>
+                            <div class="bg-circle-2 bg-circle"></div>
+                        </header>
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 order-lg-2">
+                                    <div class="p-5"></div>
+                                </div>
+                                <div class="col">
+                                    <h2 class="display-4">Les catégories</h2>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>                                                                        
+                                                <th:block th:each="categorie:${categorie}"><tr>
+                                                        <td th:text="${categorie.nom}" th:value="${categorie.id}"></td>
+                                                        <td>
+                                                            <div><a class="btn btn-primary" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button"  style="background: #ffcccc;border:0px;font-family: Lato, sans-serif;"></a></td> <td><button class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: #ffcccc;border:0px;font-family: Lato, sans-serif;">Delete</button></td>
+                                                    </tr>  
+                                                    </table>
+                                                    </div> 
+                                                    </div>
+                                <div class="col">
+                                     <div class="p-5">
+                                             <h4 class="display-4">Comission</h4>
+                                                 <h4 th:text="${comission.pourcentage+' %'}"> </h4> </td>                                                                          
+                                     <form action="/admin/categorie" method="post">
+                                                                <div class="bg-circle-4 bg-circle"></div>
+                                                                <h2>Mis à jour comission</h2>
+                                                                <h2 class="display-4" style="font-size: 30px;"></h2>
+                                                                <p>Comission : </p><input type="text" class="form-control" name="comission">
+                                                                    <input type="hidden"name="idadmin" th:value="${idadmin}"/>
+                                                                    <div class="bg-circle-2 bg-circle"></div><input type="submit" class="btn btn-primary btn-xl rounded-pill mt-5" role="button" data-bss-hover-animate="pulse" value="Ajouter"></form>
+                                                                     
+                                     </div>                        
+                                </div>
+                                                    <div class="col">
+                                                        <div class="p-5">
+                                                            <form action="categorie" method="post">
+                                                                <div class="bg-circle-4 bg-circle"></div>
+                                                                <h2 class="display-4">Nouvelle catégorie</h2>
+                                                                <h2 class="display-4" style="font-size: 30px;"></h2>
+                                                                <p>nom:</p><input type="text" class="form-control" name="nom">
+                                                                    <input type="hidden"name="idadmin" th:value="${idadmin}"/>
+                                                                    <div class="bg-circle-2 bg-circle"></div><input type="submit" class="btn btn-primary btn-xl rounded-pill mt-5" role="button" data-bss-hover-animate="pulse" value="Ajouter"></form>   </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        </div>
+                                                                        </section>
+                                                                        <section>                                                                            
+                                                                        </section>
+                                                                        <section></section>
+                                                                        <footer class="py-5 bg-black">
+                                                                            <div class="container">
+                                                                                <p class="text-center text-white m-0 small">Copyright&nbsp;© Brand 2023</p>
+                                                                            </div>
+                                                                        </footer>
+                                                                        
+                                                                        <script>
+         var lien = "http://localhost:8082/"
+              var dat =[];
+                var lab =[];                                                            
+     function enchereplusenvie(){                                         
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange=function(){
+                                                if(this.readyState == 4 && this.status == 200){ console.log(" itoooo");    
+                                                    var response = JSON.parse(xmlhttp.response);
+                                                    var _response = [];
+                                                            _response = response;
+                                                            console.log(_response);
+                                                    console.log(_response.length);
+                                                    for(let i=0; i<_response.length;i++){
+                                                        dat.push(_response[i].nombreuser);
+                                                        lab.push("N° "+i+":"+_response[i].produit+"-#"+_response[i].id);
+                                                        console.log(" itoooo :: "+_response[i].maxcategorie)
+                                                     //   document.getElementById("wawa").innerHTML = this.responseText;
+                                                    }
+                                                }       
+                                            };
+                                            xmlhttp.open("GET",lien+"Enchere/Enchere/enchereplusenvie",true);
+                                            xmlhttp.send();
+                }
+                enchereplusenvie();
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pie chart
+			new Chart(document.getElementById("chartjs-dashboard-pie"), {
+				type: "pie",
+				data: {
+					labels: lab,
+					datasets: [{
+						data: dat,
+						backgroundColor: [
+							"#FF3974",
+							"#FFBDBD",
+							"#9319F7"
+						],
+						borderWidth: 5
+					}]
+				},
+				options: {
+					responsive: !window.MSInputMethodContext,
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					cutoutPercentage: 75
+				}
+			});
+		}); </script>
+                                                                        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+                                                                        <script src="assets/js/bs-init.js"></script>
+                                                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+                                                                        <script src="assets/js/MUSA_input-helper.js"></script>
+                                                                        </body>
+
+
+                                                                        </html>
+

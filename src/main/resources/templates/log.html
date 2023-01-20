@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title> Inscription </title>
+    </head>
+    <body>
+        <h3>Inscription</h3>
+        <form action="inscription" method="post">
+            <p>Nom :</p> 
+            <p><input name="nom"></p>
+            <p>Prenom </p>
+            <p><input name="prenom"></p>
+            <p>PSEUDO </p>
+            <p><input name="pseudo"></p>
+            <p>email </p>
+            <p><input name="email" type="text"></p>
+            <p>MDP </p>
+            <p><input name="motdepasse" type="password"></p>
+
+            <p>Date de Naissance</p>
+            <input type="date" name="datenaissance"/>
+            <p> Genre:  <select name="genre">
+                    <th:block th:each="genre:${genre}">
+                        <option th:text="${genre.genre}" th:value="${genre.id}"></option>
+                    </th:block>
+                </select>
+            </p>
+            <p>
+                Couleur: 
+                <select name="couleur" required>
+                    <th:block th:each="couleur:${couleur}">
+                        <option th:text="${couleur.couleur}" th:value="${couleur.id}"></option>
+                    </th:block>
+                </select>      
+            </p>
+            Diplome 
+            <select name="diplome" required>
+                <th:block th:each="diplome:${diplome}">
+                    <option th:text="${diplome.diplome}" th:value="${diplome.id}"></option>
+                </th:block>
+            </select>  
+            <p>Description </p>
+            <p><textarea name="description"></textarea></p>
+            <p>Moyenne limite </p>
+            <p><input name="moyenne"/></p>
+
+            <input type="submit" name="valider" value="S'inscrire"/>
+            </p>
+        </form>
+    </body>
+</html>
+

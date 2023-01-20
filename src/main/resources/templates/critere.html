@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <body>
+        <h3>Mes Informations : </h3>
+        <h1>Ajout Critere</h1>
+        <form action="mesinformation" method="post">
+            <input type="hidden" name="id"  th:value="${id}" /> 
+            <input type="hidden" name="idcouleur"  th:value="${personne.idcouleur}" /> 
+            <input type="hidden" name="iddiplome"  th:value="${personne.iddiplome}" /> 
+            <input type="hidden" name="date"  th:value="${date}" />   
+            <th:block th:each="critere:${critere}">
+                <div th:if="${critere.etat==1 || critere.etat==0}">
+                    <h4 th:text="${critere.critere}"></h4>
+                    <input type="text" th:name="${critere.critere}"/>
+                    
+                </div>
+                <div th:if="${critere.etat==2}">
+                    <h4 th:text="${critere.critere}"></h4>
+                    <select  th:name="${critere.critere}"/>
+                        <option value="0">Non</option>
+                        <option value="1">Oui</option>
+                    </select>
+                </div>
+            </th:block>
+            <input type="hidden">           
+                <p><input type="submit" name="Valider"></p>
+        </form>
+    </body>
+</body>
+</html>
+

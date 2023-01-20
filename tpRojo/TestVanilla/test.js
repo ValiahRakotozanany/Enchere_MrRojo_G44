@@ -1,0 +1,3 @@
+function getAggregate() {
+    alert("ok");
+}

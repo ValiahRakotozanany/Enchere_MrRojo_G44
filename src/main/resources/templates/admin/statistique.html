@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <title>Statistique</title>
+    
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="../assets/css/MUSA_input-helper-1.css">
+    <link rel="stylesheet" href="../assets/css/MUSA_input-helper.css">
+        		<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+        	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+
+	<link href="../assets/css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
+            <div class="container"><a class="navbar-brand" href="#">GEtit</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                       <li class="nav-item"><a class="nav-link" href="/">Log Out</a></li>                       
+                    </ul>
+                </div>
+            </div>
+        </nav> <header class="text-center text-white masthead" data-bss-hover-animate="bounce">
+        <div class="masthead-content">
+            <div class="container">
+                <h2 class="masthead-subheading mb-0">Statistique</h2>
+            </div>
+        </div>
+        <div class="bg-circle-1 bg-circle"></div>
+        <div class="bg-circle-2 bg-circle"></div>
+        <div class="bg-circle-3 bg-circle"></div>
+        <div class="bg-circle-4 bg-circle"></div>
+    </header>
+         <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5"><div class="card">
+								<div class="card-header">
+									<h4 class="masthead-subheading mb-0">Top 3 des encheres qui ont le plus rapportés </h4>
+ars.</h6>
+								</div>
+								<div class="card-body">
+									<div class="chart">
+										<canvas id="chartjs-bar"></canvas>
+									</div>
+								</div>
+							</div> </div>
+                </div>
+
+                <div class="col-lg-6 order-lg-2">                        
+                    <div class="p-5">
+                        <div class="card">
+                            <div class="card-header"><br></br><h4 class="masthead-subheading mb-0">Les catégories les plus populaires par mois</h4> </div>
+                      <div class="card-body">
+                        <div class="chart chart-sm">
+			<canvas id="chartjs-dashboard-line"></canvas></div>
+                        </div>
+                       
+                        </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+         <section>
+             
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <div class="card-header">
+  <div class="card">
+                            <div class="card-header"><br></br><h4 class="masthead-subheading mb-0">Top 3 des encheres les plus enviés </h4> </div>                  								
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="py-3">
+											<div class="chart chart-xs">
+												<canvas id="chartjs-dashboard-pie"></canvas>
+											</div>
+										</div>
+                                                                        </div>
+                                                                </div>
+                        </div></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5"><div class="card-body py-3">
+                        <div class="chart chart-sm">
+			<canvas id="chartjs-dashboard-line"></canvas>
+									</div>
+								</div>
+                    </div>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+       
+        <section>
+            <div class="container"></div>
+        </section>
+        <section></section>
+        <footer class="py-5 bg-black">
+            <div class="container">
+                <p class="text-center text-white m-0 small">Copyright&nbsp;© Brand 2023</p>
+            </div>
+        </footer>        	
+<script>
+         var lien = "http://localhost:8082/"
+              var dat =[];
+                var lab =[];                                                            
+     function enchereplusenvie(){                                         
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange=function(){
+                                                if(this.readyState == 4 && this.status == 200){ console.log(" itoooo");    
+                                                    var response = JSON.parse(xmlhttp.response);
+                                                    var _response = [];
+                                                            _response = response;
+                                                            console.log(_response);
+                                                    console.log(_response.length);
+                                                    for(let i=0; i<_response.length;i++){
+                                                        dat.push(_response[i].nombreuser);
+                                                        lab.push("N° "+i+":"+_response[i].produit+"-#"+_response[i].id);
+                                                        console.log(" itoooo :: "+_response[i].maxcategorie)
+                                                     //   document.getElementById("wawa").innerHTML = this.responseText;
+                                                    }
+                                                }       
+                                            };
+                                            xmlhttp.open("GET",lien+"Enchere/Enchere/enchereplusenvie",true);
+                                            xmlhttp.send();
+                }
+                enchereplusenvie();
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pie chart
+			new Chart(document.getElementById("chartjs-dashboard-pie"), {
+				type: "pie",
+				data: {
+					labels: lab,
+					datasets: [{
+						data: dat,
+						backgroundColor: [
+							"#FF3974",
+							"#FFBDBD",
+							"#9319F7"
+						],
+						borderWidth: 5
+					}]
+				},
+				options: {
+					responsive: !window.MSInputMethodContext,
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					cutoutPercentage: 75
+				}
+			});
+		});  var labelmois = [];
+                var valuecategorie =[];
+                var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; 
+              
+                function statistique(){                                         
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange=function(){
+                                                if(this.readyState == 4 && this.status == 200){ console.log(" itoooo");    
+                                                    var response = JSON.parse(xmlhttp.response);
+                                                    var _response = [];
+                                                            _response = response;
+                                                    console.log(_response.length);
+                                                    for(let i=0; i<_response.length;i++){
+                                                        valuecategorie.push(_response[i].maxcategorie);
+                                                        labelmois.push(_response[i].nom+" - "+ month[i]);
+                                                        console.log(" itoooo"+_response[i].maxcategorie)
+                                                     //   document.getElementById("wawa").innerHTML = this.responseText;
+                                                    }
+                                                }       
+                                            };
+                                            xmlhttp.open("GET",lien+"Enchere/categoriemax",true);
+                                            xmlhttp.send();
+                }
+            statistique();
+		document.addEventListener("DOMContentLoaded", function() {
+			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+			gradient.addColorStop(0, "#F871A9");
+			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+			// Line chart
+			new Chart(document.getElementById("chartjs-dashboard-line"), {
+				type: "line",
+				data: {
+					labels: labelmois,
+					datasets: [{
+						label: 'Valeur  ',
+						fill: true,
+						backgroundColor: gradient,
+						borderColor:"#FF3939",
+						data: valuecategorie
+					}]
+				},
+				options: {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					tooltips: {
+						intersect: false
+					},
+					hover: {
+						intersect: true
+					},
+					plugins: {
+						filler: {
+							propagate: false,
+							color: "#FF3974"
+						}
+					},
+					scales: {
+						xAxes: [{
+							reverse: true,
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								stepSize: 1000
+							},
+							display: true,
+							borderDash: [3, 3],
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}]
+					}
+				}
+			});
+		});  var lien = "http://localhost:8082/"
+                      var valuechiffremax =[];
+                var labelencherechiffre =[];                                               
+                 function chiffremaxenchere(){                                         
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange=function(){
+                                                if(this.readyState == 4 && this.status == 200){ console.log(" itoooo");    
+                                                    var response = JSON.parse(xmlhttp.response);
+                                                    var _response = [];
+                                                            _response = response;
+                                                    console.log(_response.length);
+                                                    for(let i=0; i<_response.length;i++){
+                                                        valuechiffremax.push((_response[i].chiffre*100));
+                                                        console.log("=="+_response[i].chiffre*100);
+                                                        labelencherechiffre.push("N° "+i+":"+_response[i].produit+"-#"+_response[i].id);
+                                                        console.log(" itoo ---"+_response[i].maxcategorie)
+                                                     //   document.getElementById("wawa").innerHTML = this.responseText;
+                                                    }
+                                                }       
+                                            };
+                                            xmlhttp.open("GET",lien+"Enchere/Enchere/chiffremaxenchere",true);
+                                            xmlhttp.send();
+                }
+                chiffremaxenchere();
+		document.addEventListener("DOMContentLoaded", function() {
+                    
+			// Bar chart
+			new Chart(document.getElementById("chartjs-bar"), {
+				type: "bar",
+				data: {
+					labels: labelencherechiffre,
+					datasets: [{
+						label:" ",
+						backgroundColor: "#141414",
+						borderColor: window.theme.primary,
+						hoverBackgroundColor:"#F8346F",
+						hoverBorderColor: "#F8346F",
+						data: valuechiffremax,
+						barPercentage: .75,
+						categoryPercentage: .5
+					}, {
+						label: "",
+						backgroundColor: "#dee2e6",
+						borderColor: "#dee2e6",
+						hoverBackgroundColor: "#dee2e6",
+						hoverBorderColor: "#dee2e6",
+						data: [],
+						barPercentage: .75,
+						categoryPercentage: .5
+					}]
+				},
+				options: {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					scales: {
+						yAxes: [{
+							gridLines: {
+								display: false
+							},
+							stacked: false,
+							ticks: {
+								stepSize: 20
+							}
+						}],
+						xAxes: [{
+							stacked: false,
+							gridLines: {
+								color: "transparent"
+							}
+						}]
+					}
+				}
+			});
+		});
+	</script>
+        <script src="../assets/js/app.js"></script>
+        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../assets/js/bs-init.js"></script>
+        <script src="../assets/js/chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="../assets/js/MUSA_input-helper.js"></script>
+    </body>
+
+</html>

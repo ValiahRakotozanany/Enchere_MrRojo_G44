@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "b0b9cc13-e895-4170-b004-669217cdf33b",
+		"name": "Enchere",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddEnchere",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"ram 14Go\",\r\n    \"prixminimal\":12000,\r\n    \"durree\":\"01:00:00\",\r\n    \"utilisateur\":1,\r\n    \"datetime\":\"2022-01-01T15:15:00.000\",\r\n    \"produit\":1,\r\n    \"etat\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/Enchere/Enchere/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"Enchere",
+						"Enchere",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rencherir",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"montant\":2200000,\r\n    \"datetime\":\"2023-01-17T22:41:00.000\",\r\n    \"utilisateur\":2,\r\n    \"enchere\":3,\r\n    \"etat\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/Enchere/rencherir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"Enchere",
+						"rencherir"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPhotoMongoDb",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "AddEnchereWithProduitAndPhoto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"produit\":{\r\n        \"nom\":\"Ordinateur\",\r\n        \"categorie\":1\r\n    },\r\n    \"enchere\":{\r\n        \"description\":\"ram 16Go ,memoire 500Go\",\r\n        \"prixminimal\":120000,\r\n        \"durree\":\"00:30:00\",\r\n        \"utilisateur\":1,\r\n        \"datetime\":\"2022-01-01T15:15:00.000\",\r\n        \"etat\":0\r\n    },\r\n    \"photos\":[\r\n        \"06540d6a4f6caacg605c1ga1651cag6510c65g1a06510ga6g5a01g6a1gaacgca\",\r\n        \"czplf51454515454cr1eg51er41vg4r15gv1ergv1e5r4gv15er1gv51rv5er41gf$zlf\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/Enchere/Enchere",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"Enchere",
+						"Enchere"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListeEnchere",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/Enchere/Enchere",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"Enchere",
+						"Enchere"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "historiqueenchere",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/utilisateur/1/enchere",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"utilisateur",
+						"1",
+						"enchere"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detailsenchere",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/Enchere/3/details",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"Enchere",
+						"3",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RechargementCompte",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"montant\":140000,\r\n    \"datetime\":\"2023-01-23T09:30:00.000\",\r\n    \"utilisateur\":2,\r\n    \"etat\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/Echere/Mouvement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"Echere",
+						"Mouvement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginUtilisateur",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"ward@gmail.com\",\r\n    \"motdepasse\":\"ward\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/utilisateur/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"utilisateur",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rechereche",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"ram 14Go\",\r\n    \"prixminimal\":12000,\r\n    \"durree\":\"01:00:00\",\r\n    \"utilisateur\":1,\r\n    \"datetime\":\"2022-01-01T15:15:00.000\",\r\n    \"produit\":1,\r\n    \"etat\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/Enchere/Enchere/recherche",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"Enchere",
+						"Enchere",
+						"recherche"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

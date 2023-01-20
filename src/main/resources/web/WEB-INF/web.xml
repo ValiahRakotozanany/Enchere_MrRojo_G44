@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>C_Inscrit</servlet-name>
+        <servlet-class>Controller.C_Inscrit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>C_AjoutCritere</servlet-name>
+        <servlet-class>Controller.C_AjoutCritere</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>C_CritereRecherche</servlet-name>
+        <servlet-class>Controller.C_CritereRecherche</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>C_Inscrit</servlet-name>
+        <url-pattern>/C_Inscrit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>C_AjoutCritere</servlet-name>
+        <url-pattern>/C_AjoutCritere</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>C_CritereRecherche</servlet-name>
+        <url-pattern>/C_CritereRecherche</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

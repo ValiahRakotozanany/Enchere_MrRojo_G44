@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Facelet Title</title>
+    </head>
+    <body>
+        Yeaaah
+        <h3>Match</h3>        
+        <th:block th:each="match:${match}">
+            
+            <h4 th:text="${match.moyenne}"></h4>
+            <h4 th:text="${match.nom}"></h4>
+        </th:block>        
+        <h3>No Match</h3>
+          <th:block th:each="match:${nomatch}">
+            <h4 th:text="${match.moyenne}"></h4>
+            <h4 th:text="${match.nom}"></h4>
+        </th:block>        
+    </body>
+</html>
+

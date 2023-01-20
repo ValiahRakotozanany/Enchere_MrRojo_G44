@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <title>Accueil</title>
+    
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="../assets/css/MUSA_input-helper-1.css">
+    <link rel="stylesheet" href="../assets/css/MUSA_input-helper.css">
+        	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+
+	<link href="../assets/css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
+            <div class="container"><a class="navbar-brand" href="#">GEtit</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><form method="post" action="/admin/categorie"> <input type="hidden" name="idadmin"  th:value="${admin.id}" /> <button class="btn btn-primary" data-bss-hover-animate="pulse" type="submit" style="background-color: black;border:0px;border-radius: 46px;font-family: Lato, sans-serif;">Gestion de Parametre</button></form>                                               </li>
+                        <li class="nav-item"><a href="statistique"><button class="btn btn-primary" data-bss-hover-animate="pulse" type="submit" style="background-color: black;border:0px;border-radius: 46px;font-family: Lato, sans-serif;">Statistique</button></a></form></li> <li class="nav-item"><a class="nav-link" href="/">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="bounce animated p-5">
+                            <header class="text-center text-white masthead">
+                                <div class="masthead-content">
+                                    <div class="container">
+                                        <h1 class="masthead-heading mb-0"></h1>
+                                        <h2 class="masthead-subheading mb-0">&nbsp;</h2>
+                                        <h2 class="masthead-subheading mb-0">Takeit</h2>
+                                        <h2 class="masthead-subheading mb-0">Getit</h2>
+                                        <h2 class="masthead-subheading mb-0">&nbsp;</h2>
+                                        <h2 class="masthead-subheading mb-0">&nbsp;</h2>
+                                    </div>
+                                </div>
+                                <div data-aos="fade" class="bg-circle-1 bg-circle">
+                                    <div class="bg-circle-3 bg-circle"></div>
+                                </div>
+                                <div class="bg-circle-2 bg-circle"></div>
+                                <div class="bg-circle-4 bg-circle"></div>
+                            </header>
+                        </div>
+                    </div>                   
+                    
+                    <div class="col-lg-6 order-lg-1">
+                        
+                            <h2 class="display-4" style="font-size: 30px;"></h2>
+                            <h2 class="display-4" style="font-size: 30px;">Les demandes de rechargement</h2>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <th>Utilisateur</th>
+                                    <th></th>
+                                    <th>Montant</th>
+                                    <th>Date de demande</th>
+                                    </thead>
+                                    <tbody>
+                                       
+                                            <th:block th:each="rechargement:${rechargement}"> <tr>
+                                                <td th:text="${rechargement.nom}" th:value="${rechargement.id}"></td>
+                                                <td th:text="${rechargement.prenom}" th:value="${rechargement.id}"></td>
+                                                <td th:text="${rechargement.montant}" th:value="${rechargement.id}"></td>
+                                                <td th:text="${rechargement.datetime}" th:value="${rechargement.id}"></td>
+                                                <td> <form method="post" action="/admin/login"><input type="hidden" name="idadmin"  th:value="${admin.id}" /><input type="hidden" name="iduser"  th:value="${rechargement.id}" /> <input type="hidden" name="re"  th:value="1" /> <button class="btn btn-primary" data-bss-hover-animate="pulse" type="submit" style="border-radius: 46px;background: black;font-family: Lato, sans-serif;">Valider</button></form> </td>
+                                                <td><form method="post" action="/admin/login"> <input type="hidden" name="idadmin"  th:value="${admin.id}" /><input type="hidden" name="iduser"  th:value="${rechargement.id}" /><input type="hidden" name="re"  th:value="2" /> <button class="btn btn-primary" data-bss-hover-animate="pulse" type="submit" style="border-radius: 46px;background: black;font-family: Lato, sans-serif;">Annuler</button></form> </td>                                                                                        
+                                           </tr> </th:block>
+
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                                                   
+                      
+                    </div>
+                </div>    </div>
+        </section>
+        <section>
+            <div class="container"></div>
+        </section>
+        <section></section>
+        <footer class="py-5 bg-black">
+            <div class="container">
+                <p class="text-center text-white m-0 small">Copyright&nbsp;© Brand 2023</p>
+            </div>
+        </footer>        	
+
+	<script>
+            
+                  var lien = "http://localhost:8082/"
+                var labelmois = [];
+                var valuecategorie =[];
+                var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                function statistique(){                                         
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.onreadystatechange=function(){
+                                                if(this.readyState == 4 && this.status == 200){ console.log(" itoooo");    
+                                                    var response = JSON.parse(xmlhttp.response);
+                                                    var _response = [];
+                                                            _response = response;
+                                                    console.log(_response.length);
+                                                    for(let i=0; i<_response.length;i++){
+                                                        valuecategorie.push(_response[i].maxcategorie);
+                                                        labelmois.push(_response[i].nom+" - "+ month[i]);
+                                                        console.log(" itoooo"+_response[i].maxcategorie)
+                                                     //   document.getElementById("wawa").innerHTML = this.responseText;
+                                                    }
+                                                }       
+                                            };
+                                            xmlhttp.open("GET",lien+"Enchere/categoriemax",true);
+                                            xmlhttp.send();
+                }
+            statistique();
+		document.addEventListener("DOMContentLoaded", function() {
+			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+			gradient.addColorStop(0, "#F871A9");
+			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+			// Line chart
+			new Chart(document.getElementById("chartjs-dashboard-line"), {
+				type: "line",
+				data: {
+					labels: labelmois,
+					datasets: [{
+						label: 'Valeur  ',
+						fill: true,
+						backgroundColor: gradient,
+						borderColor:"#FF3939",
+						data: valuecategorie
+					}]
+				},
+				options: {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					tooltips: {
+						intersect: false
+					},
+					hover: {
+						intersect: true
+					},
+					plugins: {
+						filler: {
+							propagate: false,
+							color: "#FF3974"
+						}
+					},
+					scales: {
+						xAxes: [{
+							reverse: true,
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								stepSize: 1000
+							},
+							display: true,
+							borderDash: [3, 3],
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}]
+					}
+				}
+			});
+		});
+	</script>
+        <script src="../assets/js/app.js"></script>
+        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../assets/js/bs-init.js"></script>
+        <script src="../assets/js/chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="../assets/js/MUSA_input-helper.js"></script>
+    </body>
+
+
+							}
+						}]
+					}
+				}
+			});
+		});
+	</script>
+        <script src="../assets/js/app.js"></script>
+        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../assets/js/bs-init.js"></script>
+        <script src="../assets/js/chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="../assets/js/MUSA_input-helper.js"></script>
+    </body>
