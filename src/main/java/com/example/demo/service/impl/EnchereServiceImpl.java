@@ -26,33 +26,31 @@ import org.springframework.stereotype.Service;
  *
  * @author Murphy
  */
-
 @Service
 
 public class EnchereServiceImpl implements EnchereService {
 
     @Autowired
     EnchereRepository enchereRepository;
-    
+
     @Autowired
     ProduitRepository produitrepository;
-    
+
     @Autowired
     PhotoRepository photorepository;
-    
+
     @Autowired
     UtilisateurRepository utilisateurrepository;
-    
+
     @Autowired
     CategorieRepository categorierepository;
-    
+
     @Autowired
     HistoriqueRepository historiquerepository;
-    
+
     @Autowired
     ComissionRepository comissionRepository;
-    
-    
+
     @Override
     public Enchere save(Enchere enchere) {
         return enchereRepository.save(enchere);
@@ -62,14 +60,14 @@ public class EnchereServiceImpl implements EnchereService {
     public List<Enchere> findAll() {
         return enchereRepository.findAll();
     }
-    
+
     @Override
-    public List<Enchere> findByUtilisateur(Integer idutilisateur){
+    public List<Enchere> findByUtilisateur(Integer idutilisateur) {
         return enchereRepository.findByUtilisateur(idutilisateur);
     }
-    
+
     @Override
-    public List<Produit> findByProduit(Integer idproduit){
+    public List<Produit> findByProduit(Integer idproduit) {
         return enchereRepository.findByProduit(idproduit);
     }
 
@@ -97,7 +95,7 @@ public class EnchereServiceImpl implements EnchereService {
             photo.setBase64(ph);
             photorepository.save(photo);
         }
-        
+
         return enchere;
     }
 
@@ -114,5 +112,9 @@ public class EnchereServiceImpl implements EnchereService {
     public Commission comission() {
         return comissionRepository.findAll().get(0);
     }
-    
+
+    public void rechercheAvance() {
+
+    }
+
 }

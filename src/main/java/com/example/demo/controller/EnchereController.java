@@ -25,31 +25,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Error;
 import com.example.demo.model.TokenUtilisateur;
+import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
  *
  * @author Murphy
  */
-
 @RestController
 @RequestMapping("/Enchere/Enchere")
 public class EnchereController {
+
     @Data
     public static class MyRequestBody {
+
         Produit produit;
         Enchere enchere;
         String[] photos;
     }
     TokenUtilisateur tokenutilisateur;
 
-    
-     @Autowired
-        StatistiqueServiceImpl stat;
-   
+    @Autowired
+    StatistiqueServiceImpl stat;
+
     @Autowired
     EnchereService enchereservice;
 
@@ -63,33 +65,31 @@ public class EnchereController {
             resultat.put("data", enchereservice.save(object.getProduit(), object.getEnchere(), object.getPhotos()));
         } catch (Exception e) {
             Error error = new Error();
-            error.setCode("404");                        
-            resultat.put("error",error);
+            error.setCode("404");
+            resultat.put("error", error);
             error.setMessage("insertion non valide");
-            
+
         }
         return new ResponseEntity(resultat, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity liste (@RequestHeader String token, HttpServletRequest request) throws Exception {
+    public ResponseEntity liste(@RequestHeader String token, HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);
-        HashMap<String,Object> resultat = new HashMap<>();
+        HashMap<String, Object> resultat = new HashMap<>();
         List<Enchere> list = enchereservice.findAll();
-        resultat.put("data",list);
-        return new ResponseEntity(resultat,HttpStatus.OK);
-    }   
-    
-    @GetMapping("/recherche")
-    public ResponseEntity rechercheAvancee (@RequestBody Enchere enchere,@RequestHeader String token, HttpServletRequest request) throws Exception {
-        tokenutilisateur.verifierTokenClient(token, request);
-        HashMap<String,Object> resultat = new HashMap<>();
-        List<Enchere> list = enchereservice.rechercheAvance(enchere);
-        resultat.put("data",list);
-        return new ResponseEntity(resultat,HttpStatus.OK);
+        resultat.put("data", list);
+        return new ResponseEntity(resultat, HttpStatus.OK);
     }
-    
-    
+
+    @GetMapping("/recherche")
+    public ResponseEntity rechercheAvancee(@RequestBody Enchere enchere, @RequestHeader String token, HttpServletRequest request) throws Exception {
+        tokenutilisateur.verifierTokenClient(token, request);
+        HashMap<String, Object> resultat = new HashMap<>();
+        List<Enchere> list = enchereservice.rechercheAvance(enchere);
+        resultat.put("data", list);
+        return new ResponseEntity(resultat, HttpStatus.OK);
+    }
 
     public ResponseEntity liste(@RequestBody Enchere enchere, @RequestHeader String token, HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);
@@ -99,16 +99,39 @@ public class EnchereController {
         return new ResponseEntity(resultat, HttpStatus.OK);
     }
 
-
-    
-    
     @GetMapping("/chiffremaxenchere")
-    public List<Chiffreenchere> chiffremaxenchere(){
+    public List<Chiffreenchere> chiffremaxenchere() {
         return stat.chiffremaxenchere();
     }
-    
+
     @GetMapping("/enchereplusenvie")
-    public List<Chiffreenchere> enchereplusenvie(){
+    public List<Chiffreenchere> enchereplusenvie() {
         return stat.enchereplusenvie();
     }
+
+    public String rechercheAvance(Model model, HttpServletRequest request) {
+        String requete = "Select *,c.nom,c.id as idcategorie from enchere e join produit p on p.id = e.idproduit join categorie c on c.id = p.idcategorie where 1=1";
+        if (request.getParameter("prixminimal") != null) {
+            requete += requete + " and e.prixminimal =" + request.getParameter("prixminimal");
+        }
+        if (request.getParameter("description") != null) {
+            requete += requete + " and e.description like '%" + request.getParameter("description") + "%'";
+        }
+        if (request.getParameter("categorie") != null) {
+            requete += requete + " and c.nom like '%" + request.getParameter("categorie") + "%'";
+        }
+        if (request.getParameter("idcategorie") != null) {
+            requete += requete + " and c.id =" + request.getParameter("idcategorie");
+        }
+        if (request.getParameter("datetime") != null) {
+            String time = request.getParameter("categorie");
+            time = time.replace("T", " ") + ":00.0000";
+            Timestamp dDebut = Timestamp.valueOf(time);
+            Timestamp dFin = new Timestamp(dDebut.getYear(), dDebut.getMonth(), dDebut.getDate()
+                    , 23, 59, 0, 0);
+            requete += requete + " and e.datetime >= '"+ dDebut+ "' and e.datetime<='"+dFin+"'";
+        }
+        return requete;
+    }
+
 }
