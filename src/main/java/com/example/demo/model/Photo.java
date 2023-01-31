@@ -6,6 +6,7 @@ package com.example.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,12 +29,12 @@ public class Photo {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
-//    Integer id;
+    // String id;
+    Integer id;
     @Column(name = "base64")
     String base64;
-    @ManyToOne
-    @JoinColumn(name = "idenchere")
-    Enchere enchere;
+    // @ManyToOne
+    // @JoinColumn(name = "idenchere")
+    Integer idenchere;
     
 }

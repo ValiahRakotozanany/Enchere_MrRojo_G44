@@ -11,6 +11,8 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -52,9 +54,8 @@ public class Enchere {
     Produit produit;
     @Column(name = "etat")
     Integer etat;
-   @OneToMany(mappedBy = "enchere")
-   @JsonIgnore
-   public List<Photo> photos;
+    @OneToMany(mappedBy = "idenchere")
+    public List<Photo> photos;
         
     public Timestamp getDateLimit () {
         Calendar cal = Calendar.getInstance();
