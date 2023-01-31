@@ -25,10 +25,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Error;
 import com.example.demo.model.TokenUtilisateur;
+import com.example.demo.repository.UtilisateurRepository;
+import com.example.demo.service.UtilisateurService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
@@ -37,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @RequestMapping("/Enchere/Enchere")
+@CrossOrigin
 public class EnchereController {
     @Data
     public static class MyRequestBody {
@@ -53,6 +57,9 @@ public class EnchereController {
     @Autowired
     EnchereService enchereservice;
 
+    @Autowired
+    UtilisateurService utilisateurService;
+    
     @PostMapping
 //    public ResponseEntity save (@RequestBody Object[] objects){
     public ResponseEntity save(@RequestBody MyRequestBody object, @RequestHeader String token, HttpServletRequest request) throws Exception {
@@ -70,12 +77,11 @@ public class EnchereController {
         }
         return new ResponseEntity(resultat, HttpStatus.CREATED);
     }
-
+    
     @GetMapping
-    public ResponseEntity liste (@RequestHeader String token, HttpServletRequest request) throws Exception {
-        tokenutilisateur.verifierTokenClient(token, request);
+    public ResponseEntity liste () throws Exception {
         HashMap<String,Object> resultat = new HashMap<>();
-        List<Enchere> list = enchereservice.findAll();
+        List<Enchere> list = enchereservice.getEnchereActif();
         resultat.put("data",list);
         return new ResponseEntity(resultat,HttpStatus.OK);
     }   

@@ -4,16 +4,22 @@
  */
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -38,13 +44,18 @@ public class Enchere {
     Time durree;
     @Column(name = "datetime")
     Timestamp datetime;
-    @Column(name ="idutilisateur")
-    Integer utilisateur ;
-    @Column(name ="idproduit")
-    Integer produit;
+    @ManyToOne
+    @JoinColumn(name = "idutilisateur",referencedColumnName = "id")
+    Utilisateur utilisateur ;
+    @ManyToOne
+    @JoinColumn(name = "idproduit",referencedColumnName = "id")
+    Produit produit;
     @Column(name = "etat")
     Integer etat;
-    
+   @OneToMany(mappedBy = "enchere")
+   @JsonIgnore
+   public List<Photo> photos;
+        
     public Timestamp getDateLimit () {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(getDatetime().getTime());

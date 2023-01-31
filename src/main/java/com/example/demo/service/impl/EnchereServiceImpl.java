@@ -81,26 +81,32 @@ public class EnchereServiceImpl implements EnchereService {
     @Override
     @Transactional(rollbackOn = Exception.class)
     public Enchere save(Produit produit, Enchere enchere, String[] photos) throws Exception {
-        Historique historique = new Historique();
-        Produit pr = produitrepository.save(produit);
-        historique.setProduit(pr);
-        enchere.setProduit(pr.getId());
-        Enchere echr = enchereRepository.save(enchere);
-        historique.setUtilisateur(utilisateurrepository.findById(echr.getUtilisateur()).get());
-        historique.setCategorie(categorierepository.findById(pr.getCategorie()).get());
-        historique.setEnchere(echr);
-        historiquerepository.save(historique);
-        System.out.println("tsy mety mijanona");
-        for (String ph : photos) {
-            Photo photo = new Photo();
-            photo.setIdenchere(echr.getId());
-            photo.setBase64(ph);
-            photorepository.save(photo);
-        }
-        
-        return enchere;
+//        Historique historique = new Historique();
+//        Produit pr = produitrepository.save(produit);
+//        historique.setProduit(pr);
+//        enchere.setProduit(pr);
+//        Enchere echr = enchereRepository.save(enchere);
+//        historique.setUtilisateur(utilisateurrepository.findById(echr.getUtilisateur()).get());
+//        historique.setCategorie(categorierepository.findById(pr.getCategorie()).get());
+//        historique.setEnchere(echr);
+//        historiquerepository.save(historique);
+//        System.out.println("tsy mety mijanona");
+//        for (String ph : photos) {
+//            Photo photo = new Photo();
+//            photo.setIdenchere(echr.getId());
+//            photo.setBase64(ph);
+//            photorepository.save(photo);
+//        }
+//        
+//        return enchere;
+        return null;
     }
 
+    
+    public List<Enchere> getEnchereActif (){
+        return enchereRepository.getEnchereActif();
+    }
+    
     @Override
     public List<Enchere> rechercheAvance(Enchere echere) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

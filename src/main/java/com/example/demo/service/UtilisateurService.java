@@ -21,4 +21,5 @@ public interface UtilisateurService {
     public Utilisateur login (String email,String mdp);
     public double getsolde(int idutilisateur);
     public Utilisateur save (Utilisateur admin);
+    public Utilisateur findById(Integer id);
 }

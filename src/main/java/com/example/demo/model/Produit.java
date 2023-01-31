@@ -29,7 +29,8 @@ public class Produit {
     Integer id;
     @Column(name = "nom")
     String nom;
-    @Column(name = "idcategorie")
-    Integer categorie;
+    @ManyToOne
+    @JoinColumn(name = "idcategorie",referencedColumnName = "id")
+    Categorie categorie;
     
 }

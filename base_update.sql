@@ -235,6 +235,12 @@ from enchere e join ficheechere f on f.idenchere = e.id join produit p on p.id =
 Join utilisateur u on u.id = e.idutilisateur
 group by  e.id ,p.nom , e.description, e.durree,e.prixminimal,e.etat, e.idutilisateur,p.id ,u.nom,u.prenom order by count(f.idutilisateur) desc;
 
+create view detailsEnchere as
+select * from enchere e 
+join produit p on e.idproduit=p.id 
+join categorie c on c.id=p.idcategorie
+join utilisateur u on u.id=e.idutilisateur;
+
 -- nombre enchere maximum 
 
 create table 

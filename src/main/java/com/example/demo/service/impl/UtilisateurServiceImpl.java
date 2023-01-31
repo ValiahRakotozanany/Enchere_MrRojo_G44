@@ -60,4 +60,11 @@ public class UtilisateurServiceImpl implements UtilisateurService
     public Utilisateur login(String email, String mdp) {
         return utilisateurRepository.findByEmailAndMotdepasse(email,mdp);
     }
+
+    @Override
+    public Utilisateur findById(Integer id) {
+        return utilisateurRepository.findById(id).get();
+    }
+    
+    
 }

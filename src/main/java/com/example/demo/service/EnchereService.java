@@ -21,7 +21,7 @@ public interface EnchereService {
     public Enchere findById (Integer id);
     public Enchere save (Produit produit,Enchere enchere,String[] photo) throws Exception ;
     public List<Enchere> rechercheAvance (Enchere echere); public void updateCommsion(double pourcentage);
+    public List<Enchere> getEnchereActif ();
     public Commission comission();
-
    
  }
