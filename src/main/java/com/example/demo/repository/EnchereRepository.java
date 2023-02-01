@@ -16,7 +16,9 @@ import org.springframework.data.repository.query.Param;
  * @author Murphy
  */
 public interface EnchereRepository extends JpaRepository<Enchere,Integer> {
-    public List<Enchere> findByUtilisateur(Integer idutilisateur);
+    
+    @Query(value = "select * from enchere where idutilisateur = :id ",nativeQuery = true)
+    public List<Enchere> findByUtilisateur(@Param(value="id")Integer idutilisateur);
     public List<Produit> findByProduit(Integer idproduit);
     @Query(value = "select * from enchere e where e.etat = :#{#enchere.etat} and e.prixminimal=:#{#enchere.prixminimal} and  ",nativeQuery = true)
     public List<Enchere> rechercheAvance (@Param(value = "enchere") Enchere enchere);

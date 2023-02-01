@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import com.example.demo.model.Error;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,7 +71,7 @@ public class UtilisateurController {
     } 
     
     @GetMapping("{id}/enchere")
-    public ResponseEntity getenchere (@RequestHeader String token,@PathVariable("id") Integer id,HttpServletRequest request) throws Exception {
+    public ResponseEntity getenchere (@RequestHeader String token,@PathVariable(name = "id") Integer id,HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);        
         HashMap<String,Object> resultat = new HashMap<>();
         resultat.put("data",enchereservice.findByUtilisateur(id));
@@ -80,7 +82,16 @@ public class UtilisateurController {
     public ResponseEntity getHistorique (@PathVariable("id") Integer id,@RequestHeader String token, HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);
         HashMap<String,Object> resultat = new HashMap<>();
-        resultat.put("data",historiqueservice.findByUtilisateur(id));
+        try{
+        resultat.put("data",enchereservice.findByUtilisateur(id));        
+        System.out.println(" tsy erreur");
+        }
+        catch(Exception e){
+            Error error = new Error();
+            error.setCode("404");
+            System.out.println("erreur");
+            return new ResponseEntity(resultat.put("error", error),HttpStatus.OK);
+        }
         return new ResponseEntity(resultat,HttpStatus.OK);
     }
  
