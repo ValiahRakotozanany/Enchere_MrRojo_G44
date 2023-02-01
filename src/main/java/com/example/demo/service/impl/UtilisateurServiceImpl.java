@@ -41,10 +41,12 @@ public class UtilisateurServiceImpl implements UtilisateurService
         for(int i=0;i<fiche.size();i++){
             vfiche=vfiche+fiche.get(i).getMontant();
         }
-        for(int i=0;i<fiche.size();i++){
-            vmvt=vmvt+mvt.get(i).getMontant();
+        
+        for(int i=0;i<mvt.size();i++){
+            vmvt+= mvt.get(i).getMontant();
         }
-        return vmvt-vfiche;
+        System.out.println(" montant mouvement = "+vmvt+" _ enchere= "+vfiche);
+        return vmvt - vfiche;
     }
     
 

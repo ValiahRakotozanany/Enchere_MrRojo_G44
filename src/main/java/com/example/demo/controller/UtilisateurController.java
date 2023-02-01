@@ -83,7 +83,7 @@ public class UtilisateurController {
         resultat.put("data",historiqueservice.findByUtilisateur(id));
         return new ResponseEntity(resultat,HttpStatus.OK);
     }
-    
+ 
     @PostMapping("/login")
     public TokenUtilisateur login(@RequestBody Utilisateur utilisateur) throws Exception {
         //tokenutilisateur.verifierTokenClient(token, request);
@@ -98,6 +98,25 @@ public class UtilisateurController {
             throw new Exception("Incorrecte !!");
         }
     }
+    /*
+       @PostMapping("/login")
+    public TokenUtilisateur login(HttpServletRequest request) throws Exception {
+        //tokenutilisateur.verifierTokenClient(token, request);
+        Utilisateur d = null;
+        String email = request.getParameter("email");
+           System.out.println(" email = "+email);
+        String password= request.getParameter("motdepasse");
+        d = utilisateurService.login(email,password);
+        TokenUtilisateur t = new TokenUtilisateur();
+        System.out.println(" amind = " + d);
+        if (d != null) {
+            t.setUtilisateurid(d.getId());
+            return this.testToken(t);
+        } else {
+            throw new Exception("Incorrecte !!");
+        }
+    }*/
+
 
   /*  @PostMapping("/login/{email}/{mdp}")
     public TokenUtilisateur log(@PathVariable(name = "email") String email, @PathVariable(name = "mdp") String mdp) throws Exception {

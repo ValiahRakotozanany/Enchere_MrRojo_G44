@@ -19,12 +19,11 @@ import lombok.Data;
  *
  * @author Murphy
  */
-
 @Data
 @Entity
 @Table(name = "ficheechere")
 public class FicheEchere {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
@@ -32,11 +31,13 @@ public class FicheEchere {
     Double montant;
     @Column(name = "datetime")
     Timestamp datetime;
-    @Column(name ="idutilisateur")
-    Integer utilisateur ;
+    @ManyToOne
+    @JoinColumn(name = "idutilisateur", referencedColumnName = "id")
+    Utilisateur utilisateur;
+    
     @Column(name = "idenchere")
     Integer enchere;
     @Column(name = "etat")
     Integer etat;
-     
+
 }

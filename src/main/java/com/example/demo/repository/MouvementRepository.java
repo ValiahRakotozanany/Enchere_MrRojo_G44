@@ -23,6 +23,7 @@ public interface MouvementRepository extends JpaRepository<Mouvement, Integer> {
     @Modifying
     @Query(value = "update mouvement set etat = :etat where id = :id", nativeQuery = true)
     void validationrechargement(@Param(value = "id") int id ,@Param(value = "etat") int etat );
+    
     @Query(value = "select * from mouvement where etat = 1 and idutilisateur = :id", nativeQuery = true)
     List<Mouvement> getmouvementByIdUtilisateur(@Param(value = "id") int id );
     

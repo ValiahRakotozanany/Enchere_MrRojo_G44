@@ -86,6 +86,7 @@ public class TokenUtilisateur {
                 System.out.println(claims + token);
             } catch (Exception e) {
                 // TODO: handle exception
+                e.printStackTrace();
                 throw new Exception("Token invalid/expired");
             }
         } else {

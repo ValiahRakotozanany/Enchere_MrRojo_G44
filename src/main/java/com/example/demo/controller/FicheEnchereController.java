@@ -68,6 +68,8 @@ public class FicheEnchereController {
     
     @PostMapping("/rencherir")
     public ResponseEntity save (@RequestBody FicheEchere ficheenchere,@RequestHeader String token,HttpServletRequest request) throws Exception{        
+        System.out.println("tokk = "+token);
+        System.out.println("utilisateur  = "+ficheenchere.getUtilisateur().getId());
         tokenutilisateur.verifierTokenClient(token, request);
         Enchere enchere = enchereService.findById(ficheenchere.getEnchere());
         FicheEchere lastenchere = ficheEnchereService.findLastEnchere(ficheenchere.getEnchere());
@@ -77,24 +79,31 @@ public class FicheEnchereController {
         error.setCode("404");
         System.out.println(enchere.getDatetime());
         System.out.println(enchere.getDateLimit());
-       /* if (utilisateurservice.getsolde(ficheenchere.getUtilisateur()) < ficheenchere.getMontant() ) {
+        if (utilisateurservice.getsolde(ficheenchere.getUtilisateur().getId()) < ficheenchere.getMontant() ) {
+            System.out.println("solde = >  "+utilisateurservice.getsolde(ficheenchere.getUtilisateur().getId()));
             error.setMessage("solde insuffisant");
             resultat.put("error", error);
+            System.out.println("solde insuffisant");
             return new ResponseEntity(resultat,HttpStatus.OK);
-        }*/
+        }
         if (ficheenchere.getMontant() <= lastenchere.getMontant() || ficheenchere.getMontant() < enchere.getPrixminimal() ) {
-            error.setMessage("montant trop petit");
+            error.setMessage("montant trop petit");            
             resultat.put("error", error);
+            System.out.println("montant farany = "+lastenchere.getMontant());
+            System.out.println("montant trop petit");
             return new ResponseEntity(resultat,HttpStatus.OK);
         } 
         else if (now.after(enchere.getDateLimit())) {
             error.setMessage("date limit atteint");
             resultat.put("error", error);
+            System.out.println("date limit atteint");
             return new ResponseEntity(resultat,HttpStatus.OK);
         }        
+        ficheEnchereService.updateEtatEnchere(enchere.getId());
         ficheenchere.setDatetime(now);
         ficheenchere.setEtat(1);
         lastenchere.setEtat(0);
+        System.out.println("mety ve ?");
         ficheEnchereService.save(lastenchere);
         resultat.put("data",ficheEnchereService.save(ficheenchere));
         return new ResponseEntity(resultat,HttpStatus.OK);
