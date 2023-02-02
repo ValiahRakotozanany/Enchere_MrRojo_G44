@@ -21,6 +21,10 @@ public interface FicheEchereRepository extends JpaRepository<FicheEchere,Integer
     public FicheEchere findLast(@Param(value = "idenchere")Integer idenchere);
     @Query(value="select * from ficheechere where idutilisateur = :idutilisateur and etat=1",nativeQuery = true)
     public List<FicheEchere> getFicheEchereByIdUtilisateur(@Param(value = "idutilisateur")Integer id);
+    
+    @Query(value="select * from ficheechere where idutilisateur = :idutilisateur ",nativeQuery = true)
+    public List<FicheEchere> getDetailsFiche(@Param(value = "idutilisateur")Integer id);
+    
     public List<FicheEchere> findByEnchere(Integer idenchere);
 
     @Modifying

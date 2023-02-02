@@ -35,8 +35,9 @@ public class FicheEchere {
     @JoinColumn(name = "idutilisateur", referencedColumnName = "id")
     Utilisateur utilisateur;
     
-    @Column(name = "idenchere")
-    Integer enchere;
+    @ManyToOne
+    @JoinColumn(name = "idenchere", referencedColumnName = "id")
+    Enchere enchere;
     @Column(name = "etat")
     Integer etat;
 

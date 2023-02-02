@@ -58,19 +58,19 @@ public class FicheEnchereController {
     public ResponseEntity getDetails(@PathVariable("id") Integer id, @RequestHeader String token, HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);
         HashMap<String, Object> resultat = new HashMap<>();
-        resultat.put("data", ficheEnchereService.getDetails(id));
+        resultat.put("data", ficheEnchereService.getDetailsFiche(id));
         return new ResponseEntity(resultat, HttpStatus.OK);
     }
+    
     @Autowired
     CategorieService categorieservice;
-
     @PostMapping("/rencherir")
     public ResponseEntity save(@RequestBody FicheEchere ficheenchere, @RequestHeader String token, HttpServletRequest request) throws Exception {
         System.out.println("tokk = " + token);
         System.out.println("utilisateur  = " + ficheenchere.getUtilisateur().getId());
         tokenutilisateur.verifierTokenClient(token, request);
-        Enchere enchere = enchereService.findById(ficheenchere.getEnchere());
-        FicheEchere lastenchere = ficheEnchereService.findLastEnchere(ficheenchere.getEnchere());
+        Enchere enchere = enchereService.findById(ficheenchere.getEnchere().getId());
+        FicheEchere lastenchere = ficheEnchereService.findLastEnchere(ficheenchere.getEnchere().getId());
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         Error error = new Error();
         HashMap<String, Object> resultat = new HashMap<>();
@@ -106,6 +106,7 @@ public class FicheEnchereController {
         ficheenchere.setDatetime(now);
         ficheenchere.setEtat(1);
         lastenchere.setEtat(0);
+        ficheenchere.setEnchere(enchere);
         System.out.println("mety ve ?");
         ficheEnchereService.save(lastenchere);
         resultat.put("data", ficheEnchereService.save(ficheenchere));
