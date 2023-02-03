@@ -62,6 +62,8 @@ public class FicheEnchereController {
         return new ResponseEntity(resultat, HttpStatus.OK);
     }
     
+    
+
     @Autowired
     CategorieService categorieservice;
     @PostMapping("/rencherir")
@@ -69,8 +71,8 @@ public class FicheEnchereController {
         System.out.println("tokk = " + token);
         System.out.println("utilisateur  = " + ficheenchere.getUtilisateur().getId());
         tokenutilisateur.verifierTokenClient(token, request);
-        Enchere enchere = enchereService.findById(ficheenchere.getEnchere().getId());
-        FicheEchere lastenchere = ficheEnchereService.findLastEnchere(ficheenchere.getEnchere().getId());
+        Enchere enchere = enchereService.findById(ficheenchere.getIdenchere());
+        FicheEchere lastenchere = ficheEnchereService.findLastEnchere(ficheenchere.getIdenchere());
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         Error error = new Error();
         HashMap<String, Object> resultat = new HashMap<>();
@@ -106,7 +108,7 @@ public class FicheEnchereController {
         ficheenchere.setDatetime(now);
         ficheenchere.setEtat(1);
         lastenchere.setEtat(0);
-        ficheenchere.setEnchere(enchere);
+        ficheenchere.setIdenchere(enchere.getId());
         System.out.println("mety ve ?");
         ficheEnchereService.save(lastenchere);
         resultat.put("data", ficheEnchereService.save(ficheenchere));

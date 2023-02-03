@@ -34,6 +34,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -78,6 +79,12 @@ public class EnchereController {
 
         }
         return new ResponseEntity(resultat, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable("id") Integer id, @RequestHeader String token, HttpServletRequest request) throws Exception { 
+        tokenutilisateur.verifierTokenClient(token, request);
+        return new ResponseEntity(enchereservice.findById(id),HttpStatus.OK);
     }
 
     @GetMapping

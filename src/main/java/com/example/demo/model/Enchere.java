@@ -56,7 +56,10 @@ public class Enchere {
     Integer etat;
     @OneToMany(mappedBy = "idenchere")
     public List<Photo> photos;
-        
+    @OneToMany(mappedBy = "idenchere")
+    public List<FicheEchere> ficheenchere;
+
+
     public Timestamp getDateLimit () {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(getDatetime().getTime());

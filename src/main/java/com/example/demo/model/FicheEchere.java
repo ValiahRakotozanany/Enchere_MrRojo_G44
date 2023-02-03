@@ -32,13 +32,10 @@ public class FicheEchere {
     @Column(name = "datetime")
     Timestamp datetime;
     @ManyToOne
-    @JoinColumn(name = "idutilisateur", referencedColumnName = "id")
+    @JoinColumn(name = "idutilisateur", referencedColumnName ="id")
     Utilisateur utilisateur;
-    
-    @ManyToOne
-    @JoinColumn(name = "idenchere", referencedColumnName = "id")
-    Enchere enchere;
     @Column(name = "etat")
     Integer etat;
+    Integer idenchere;
 
 }
