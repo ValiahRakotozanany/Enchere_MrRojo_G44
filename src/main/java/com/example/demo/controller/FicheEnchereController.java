@@ -86,6 +86,12 @@ public class FicheEnchereController {
         HashMap<String, Object> resultat = new HashMap<>();
         error.setCode("404");
         Double solde = utilisateurservice.getSoldeBase(ficheenchere.getUtilisateur().getId());
+        if(ficheenchere.getUtilisateur().getId().equals(enchere.getUtilisateur().getId())) {
+            error.setMessage(" vous ne pouvez pas participer a votre propre enchere ");
+            resultat.put("error", error);
+            System.out.println("vous ne pouvez pas participer a votre propre enchere ");
+            return new ResponseEntity(resultat, HttpStatus.OK);
+        }
         if (ficheenchere.getMontant() > solde) {
             error.setMessage("solde insuffisant ");
             resultat.put("error", error);
@@ -93,14 +99,14 @@ public class FicheEnchereController {
             return new ResponseEntity(resultat, HttpStatus.OK);
         }
         if (lastenchere != null) {
-            if (ficheenchere.getMontant() < lastenchere.getMontant()) {
+            if (ficheenchere.getMontant() <= lastenchere.getMontant()) {
                 error.setMessage("cette montant est deja depassé");
                 resultat.put("error", error);
                 System.out.println("cette montant est deja depassé");
                 return new ResponseEntity(resultat, HttpStatus.OK);
             }
         }
-        if (ficheenchere.getMontant() < enchere.getPrixminimal()) {
+        if (ficheenchere.getMontant() <= enchere.getPrixminimal()) {
             error.setMessage("cette enchere debut a" + enchere.getPrixminimal());
             resultat.put("error", error);
             System.out.println("cette enchere debut a" + enchere.getPrixminimal());
