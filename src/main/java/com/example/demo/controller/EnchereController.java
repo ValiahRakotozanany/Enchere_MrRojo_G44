@@ -71,7 +71,7 @@ public class EnchereController {
 
  
  @PostMapping("/photo")
-    public ResponseEntity save(@RequestBody Photo photo, HttpServletRequest request) throws Exception {
+    public String save(@RequestBody Photo photo) throws Exception {
         //tokenutilisateur.verifierTokenClient(token, request);
         System.out.println(" mandeee");
         HashMap<String, Object> resultat = new HashMap<>();
@@ -82,8 +82,8 @@ public class EnchereController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity(resultat, HttpStatus.CREATED);
-
+     //   return new ResponseEntity(resultat, HttpStatus.CREATED);
+     return ""+photo.getIdenchere()+" - photo = "+photo.getBase64();
     }
     
     @PostMapping
