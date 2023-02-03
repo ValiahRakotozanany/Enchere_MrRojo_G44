@@ -34,7 +34,7 @@ public class Photo {
     @Column(name = "base64")
     String base64;
     // @ManyToOne
-    // @JoinColumn(name = "idenchere")
+    @Column(name = "idenchere")
     Integer idenchere;
     
 }
