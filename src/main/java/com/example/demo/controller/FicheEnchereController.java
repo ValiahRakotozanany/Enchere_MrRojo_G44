@@ -67,7 +67,7 @@ public class FicheEnchereController {
     public ResponseEntity getDetailsenchere(@PathVariable("id") Integer id, @RequestHeader String token, HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);
         HashMap<String, Object> resultat = new HashMap<>();
-        resultat.put("data", ficheEnchereService.getDetailsFiche(id));
+        resultat.put("data", ficheEnchereService.findByEncher(id));
         return new ResponseEntity(resultat, HttpStatus.OK);
     }
 
