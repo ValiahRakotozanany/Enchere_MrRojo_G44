@@ -45,6 +45,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @CrossOrigin
 public class EnchereController {
 
+    private String dDebut;
+
     @Data
     public static class MyRequestBody {
 
@@ -70,6 +72,7 @@ public class EnchereController {
         HashMap<String, Object> resultat = new HashMap<>();
         try {
 //            resultat.put("data",enchereservice.save((Produit)objects[0],(Enchere)objects[1],(String[])objects[2]));
+            object.getEnchere().setDatetime(new Timestamp(System.currentTimeMillis()));
             resultat.put("data", enchereservice.save(object.getProduit(), object.getEnchere(), object.getPhotos()));
         } catch (Exception e) {
             Error error = new Error();
@@ -87,10 +90,11 @@ public class EnchereController {
         return new ResponseEntity(enchereservice.findById(id),HttpStatus.OK);
     }
 
-    @GetMapping
+   /* @GetMapping
     public ResponseEntity liste() throws Exception {
         HashMap<String, Object> resultat = new HashMap<>();
         List<Enchere> list = enchereservice.getEnchereActif();
+    }*/
     @GetMapping
     public ResponseEntity liste(@RequestHeader String token, HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);
@@ -109,13 +113,13 @@ public class EnchereController {
         return new ResponseEntity(resultat, HttpStatus.OK);
     }
 
-    public ResponseEntity liste(@RequestBody Enchere enchere, @RequestHeader String token, HttpServletRequest request) throws Exception {
-        tokenutilisateur.verifierTokenClient(token, request);
-        HashMap<String, Object> resultat = new HashMap<>();
-        List<Enchere> list = enchereservice.rechercheAvance(enchere);
-        resultat.put("data", list);
-        return new ResponseEntity(resultat, HttpStatus.OK);
-    }
+//    public ResponseEntity liste(@RequestBody Enchere enchere, @RequestHeader String token, HttpServletRequest request) throws Exception {
+//        tokenutilisateur.verifierTokenClient(token, request);
+//        HashMap<String, Object> resultat = new HashMap<>();
+//        List<Enchere> list = enchereservice.rechercheAvance(enchere);
+//        resultat.put("data", list);
+//        return new ResponseEntity(resultat, HttpStatus.OK);
+//    }
 
     @GetMapping("/chiffremaxenchere")
     public List<Chiffreenchere> chiffremaxenchere() {
@@ -126,7 +130,7 @@ public class EnchereController {
     public List<Chiffreenchere> enchereplusenvie() {
         return stat.enchereplusenvie();
     }
-
+/*
     public String rechercheAvance(Model model, HttpServletRequest request) {
         String requete = "Select *,c.nom,c.id as idcategorie from enchere e join produit p on p.id = e.idproduit join categorie c on c.id = p.idcategorie where 1=1";
         if (request.getParameter("prixminimal") != null) {
@@ -151,11 +155,6 @@ public class EnchereController {
         }
         return requete;
     }
-            Timestamp dFin = new Timestamp(dDebut.getYear(), dDebut.getMonth(), dDebut.getDate()
-                    , 23, 59, 0, 0);
-            requete += requete + " and e.datetime >= '"+ dDebut+ "' and e.datetime<='"+dFin+"'";
-        }
-        return requete;
-    }
-
+           
+*/
 }

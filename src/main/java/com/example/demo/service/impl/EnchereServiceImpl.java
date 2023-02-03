@@ -103,7 +103,7 @@ public class EnchereServiceImpl implements EnchereService {
 //        }
 //        
 //        return enchere;
-        return null;
+       /* return null;
         Historique historique = new Historique();
         Produit pr = produitrepository.save(produit);
         historique.setProduit(pr);
@@ -119,7 +119,7 @@ public class EnchereServiceImpl implements EnchereService {
             photo.setIdenchere(echr.getId());
             photo.setBase64(ph);
             photorepository.save(photo);
-        }
+        }*/
 
         return enchere;
     }
