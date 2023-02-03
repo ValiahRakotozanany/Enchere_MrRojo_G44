@@ -278,3 +278,53 @@ port : 6800
 
 user :postgres
 mdp : 0ZKn0eo0VApTxxve4j4v
+
+
+
+--rencherir (getSolde)
+--somme rechargement compte
+create view entreecompte as
+select u.id, 
+case when m.montant is null then 0
+    else m.montant
+end montant
+from utilisateur u 
+left join (select idutilisateur,sum(montant) montant from mouvement where etat=1 group by  idutilisateur) m
+on u.id=m.idutilisateur;  
+
+--somme montant blocker
+create view blocker as
+select u.id,
+case when sum(fe.montant) is null then 0
+      else sum(fe.montant)
+end montant
+from utilisateur u 
+left join (select * from ficheechere where etat=1) fe
+on u.id=fe.idutilisateur
+group by u.id;
+
+--somme montant azony t@ encherany
+create view entreeenchere as
+select u.id,
+case when sum(ef.montant) is null then 0
+    else (sum(ef.montant)*(100-(select pourcentage from comission)))::float/100
+end montant 
+from utilisateur u 
+left join (
+select e.id,f.montant,e.idutilisateur from enchere e
+join ficheechere f
+on e.id=f.idenchere
+where e.etat=1 and f.etat=1  
+) ef
+on u.id=ef.idutilisateur
+group by u.id
+;
+
+--solde final par utilisateur
+create view solde as
+select c.id idutilisateur,(c.montant-b.montant+e.montant) solde
+from entreecompte c
+join blocker b on c.id=b.id 
+join entreeenchere e on b.id=e.id;
+
+
