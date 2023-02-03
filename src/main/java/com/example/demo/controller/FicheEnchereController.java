@@ -62,21 +62,44 @@ public class FicheEnchereController {
         resultat.put("data",ficheEnchereService.getDetails(id));
         return new ResponseEntity(resultat,HttpStatus.OK);
     }
+<<<<<<< Updated upstream
     @Autowired
     CategorieService categorieservice;
 
     
+=======
+    
+    
+        @GetMapping("{id}/detailsenchere")
+    public ResponseEntity getDetailsEnchere(@PathVariable("id") Integer id, @RequestHeader String token, HttpServletRequest request) throws Exception {
+        tokenutilisateur.verifierTokenClient(token, request);        
+        HashMap<String, Object> resultat = new HashMap<>();
+        resultat.put("data", ficheEnchereService.findByIdEnchere(id));
+        return new ResponseEntity(resultat, HttpStatus.OK);
+    }
+
+    @Autowired
+    CategorieService categorieservice;
+
+>>>>>>> Stashed changes
     @PostMapping("/rencherir")
     public ResponseEntity save (@RequestBody FicheEchere ficheenchere,@RequestHeader String token,HttpServletRequest request) throws Exception{        
         tokenutilisateur.verifierTokenClient(token, request);
+<<<<<<< Updated upstream
         Enchere enchere = enchereService.findById(ficheenchere.getEnchere());
         FicheEchere lastenchere = ficheEnchereService.findLastEnchere(ficheenchere.getEnchere());
+=======
+        Enchere enchere = enchereService.findById(ficheenchere.getEnchere().getId());
+        FicheEchere lastenchere = new FicheEchere();
+                lastenchere = ficheEnchereService.findLastEnchere(ficheenchere.getEnchere().getId());
+>>>>>>> Stashed changes
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         Error error = new Error();
         HashMap<String,Object> resultat = new HashMap<>();
         error.setCode("404");
         System.out.println(enchere.getDatetime());
         System.out.println(enchere.getDateLimit());
+<<<<<<< Updated upstream
        /* if (utilisateurservice.getsolde(ficheenchere.getUtilisateur()) < ficheenchere.getMontant() ) {
             error.setMessage("solde insuffisant");
             resultat.put("error", error);
@@ -98,6 +121,50 @@ public class FicheEnchereController {
         ficheEnchereService.save(lastenchere);
         resultat.put("data",ficheEnchereService.save(ficheenchere));
         return new ResponseEntity(resultat,HttpStatus.OK);
+=======
+        if (lastenchere == null) {
+            if (ficheenchere.getMontant() < enchere.getPrixminimal()) {
+                error.setMessage("montant trop petit");
+                resultat.put("error", error);
+                System.out.println("montant trop petit");
+                return new ResponseEntity(resultat, HttpStatus.OK);
+            }
+        } else {
+            if (ficheenchere.getMontant() <= lastenchere.getMontant() && ficheenchere.getMontant() < enchere.getPrixminimal()) {
+                error.setMessage("montant trop petit");
+                resultat.put("error", error);
+                System.out.println("montant farany = " + lastenchere.getMontant());
+                System.out.println("montant trop petit");
+                return new ResponseEntity(resultat, HttpStatus.OK);
+            } else if (now.after(enchere.getDateLimit())) {
+                error.setMessage("date limit atteint");
+                resultat.put("error", error);
+                System.out.println("date limit atteint");
+                return new ResponseEntity(resultat, HttpStatus.OK);
+            }
+        }
+        if (enchere.getUtilisateur().getId() == ficheenchere.getUtilisateur().getId()) {
+            error.setMessage("Vous ne pouvez pas participer à votre propre enchere");
+            resultat.put("error", error);
+            System.out.println("solde insuffisant");
+            return new ResponseEntity(resultat, HttpStatus.OK);
+        }
+        if (utilisateurservice.getsolde(ficheenchere.getUtilisateur().getId()) < ficheenchere.getMontant()) {
+            System.out.println("solde = >  " + utilisateurservice.getsolde(ficheenchere.getUtilisateur().getId()));
+            error.setMessage("solde insuffisant");
+            resultat.put("error", error);
+            System.out.println("solde insuffisant");
+            return new ResponseEntity(resultat, HttpStatus.OK);
+        }
+        ficheEnchereService.updateEtatEnchere(enchere.getId());
+        ficheenchere.setDatetime(now);
+        ficheenchere.setEtat(1);
+        ficheenchere.setEnchere(enchere);
+        System.out.println("mety ve ?");
+       // ficheEnchereService.save(lastenchere);
+        resultat.put("data", ficheEnchereService.save(ficheenchere));
+        return new ResponseEntity(resultat, HttpStatus.OK);
+>>>>>>> Stashed changes
     }
      @GetMapping("/categoriemax")
     public List<CategorieStat> categoriemax(){

@@ -20,4 +20,11 @@ public interface EnchereRepository extends JpaRepository<Enchere,Integer> {
     public List<Produit> findByProduit(Integer idproduit);
     @Query(value = "select * from enchere e where e.etat = :#{#enchere.etat} and e.prixminimal=:#{#enchere.prixminimal} and  ",nativeQuery = true)
     public List<Enchere> rechercheAvance (@Param(value = "enchere") Enchere enchere);
+<<<<<<< Updated upstream
+=======
+    @Query(value = "select * from enchere where etat=0 ",nativeQuery = true)
+    public List<Enchere> getEnchereActif ();
+    
+    
+>>>>>>> Stashed changes
 }

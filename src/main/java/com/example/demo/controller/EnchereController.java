@@ -59,10 +59,15 @@ public class EnchereController {
 //    public ResponseEntity save (@RequestBody Object[] objects){
     public ResponseEntity save(@RequestBody MyRequestBody object, @RequestHeader String token, HttpServletRequest request) throws Exception {
         tokenutilisateur.verifierTokenClient(token, request);
+        System.out.println(" aiza ? ");
         HashMap<String, Object> resultat = new HashMap<>();
         try {
+            System.out.println("produit = >" + object.getProduit());
+            System.out.println("produit = >" + object.getEnchere());
+            object.getEnchere().setDatetime(new Timestamp(System.currentTimeMillis()));
 //            resultat.put("data",enchereservice.save((Produit)objects[0],(Enchere)objects[1],(String[])objects[2]));
-            resultat.put("data", enchereservice.save(object.getProduit(), object.getEnchere(), object.getPhotos()));
+            resultat.put("data", enchereservice.saveEnchere(object.getEnchere()));
+            System.out.println(" inserer ve ? ");
         } catch (Exception e) {
             Error error = new Error();
             error.setCode("404");
@@ -127,9 +132,15 @@ public class EnchereController {
             String time = request.getParameter("categorie");
             time = time.replace("T", " ") + ":00.0000";
             Timestamp dDebut = Timestamp.valueOf(time);
+<<<<<<< Updated upstream
             Timestamp dFin = new Timestamp(dDebut.getYear(), dDebut.getMonth(), dDebut.getDate()
                     , 23, 59, 0, 0);
             requete += requete + " and e.datetime >= '"+ dDebut+ "' and e.datetime<='"+dFin+"'";
+=======
+            Timestamp dFin = new Timestamp(dDebut.getYear(), dDebut.getMonth(), dDebut.getDate(),
+                    23, 59, 0, 0);
+            requete += requete + " and e.datetime >= '" + dDebut + "' and e.datetime<='" + dFin + "'";
+>>>>>>> Stashed changes
         }
         return requete;
     }
