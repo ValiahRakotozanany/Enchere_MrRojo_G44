@@ -56,7 +56,7 @@ public class UtilisateurController {
     TokenUtilisateur tokenutilisateur;
     
     @PostMapping("insertion")
-    public ResponseEntity<Utilisateur> saveUtilisateur(@RequestBody Utilisateur utilisateur, HttpServletRequest request) throws Exception {        
+    public ResponseEntity<Utilisateur> saveUtilisateur(@RequestBody Utilisateur utilisateur, HttpServletRequest request) throws Exception {    
         return new ResponseEntity<Utilisateur>(utilisateurService.saveUtilisateur(utilisateur), HttpStatus.CREATED);
     }
     
