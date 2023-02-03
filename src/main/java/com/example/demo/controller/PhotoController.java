@@ -38,10 +38,12 @@ public class PhotoController {
 
     
     @PostMapping
-    public ResponseEntity save (@RequestBody Photo photo,@RequestHeader String token, HttpServletRequest request) throws Exception {
-        tokenutilisateur.verifierTokenClient(token, request);
+    public ResponseEntity save (@RequestBody Photo photo, HttpServletRequest request) throws Exception {
+        //tokenutilisateur.verifierTokenClient(token, request);
+        System.out.println(" mandeee");
         HashMap<String,Object> resultat = new HashMap<>();
         resultat.put("data",photoService.save(photo));
+        System.out.println(" mandeee be");
         return new ResponseEntity(resultat,HttpStatus.CREATED);
     }
     
