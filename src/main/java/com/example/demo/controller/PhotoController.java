@@ -9,7 +9,6 @@ import com.example.demo.model.TokenUtilisateur;
 import com.example.demo.service.PhotoService;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Murphy
  */
 
-@Data
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/Enchere/photo")
@@ -42,7 +40,8 @@ public class PhotoController {
         //tokenutilisateur.verifierTokenClient(token, request);
         System.out.println(" mandeee");
         HashMap<String,Object> resultat = new HashMap<>();
-        resultat.put("data",photoService.save(photo));
+        Photo p= photoService.save(photo);
+        resultat.put("data",p);
         System.out.println(" mandeee be");
         return new ResponseEntity(resultat,HttpStatus.CREATED);
     }
