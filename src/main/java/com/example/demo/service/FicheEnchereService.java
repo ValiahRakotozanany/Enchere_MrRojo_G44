@@ -15,10 +15,4 @@ public interface FicheEnchereService {
     public FicheEchere save (FicheEchere ficheenchere);
     public FicheEchere findLastEnchere (Integer idenchere) ;
     public List<FicheEchere> getDetails (Integer idenchere);
-<<<<<<< Updated upstream
-=======
-    public List<FicheEchere> getDetailsFiche (Integer idenchere);
-    void updateEtatEnchere(int idenchere);
-    public List<FicheEchere> findByIdEnchere(Integer idenchere);
->>>>>>> Stashed changes
 }

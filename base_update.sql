@@ -209,10 +209,9 @@ insert into ficheechere(montant,datetime,idutilisateur,etat,idenchere) values(20
 insert into ficheechere(montant,datetime,idutilisateur,etat,idenchere) values(25000,'17-03-2023 10:37:00',1,1,37);
 insert into ficheechere(montant,datetime,idutilisateur,etat,idenchere) values(26000,'17-03-2023 10:38:00',4,1,37);
 
-update produit set nom = 'Technologie' where idcategorie = 1;
-update produit set nom = 'Alimentation' where idcategorie = 2;
-update produit set nom = 'Sport' where idcategorie = 3;
-update produit set nom = 'Sante et Beaute' where idcategorie = 3;
+
+
+
 
 
 -- statique max enchere par mois 
@@ -265,7 +264,6 @@ join enchere e on e.id=f.idenchere
 where f.etat=1 and e.etat=1 group by f.idutilisateur;
 select * from ficheechere where idenchere=3  order by datetime desc  limit 1;
 
-ALTER TABLE enchere alter column datetime set DEFAULT CURRENT_DATE ;
 
 host: containers-us-west-82.railway.app
 

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author hp
  */
 @RestController
-@RequestMapping("/Enchere/Mouvement")
+@RequestMapping("/Echere/Mouvement")
 @CrossOrigin("*")
 public class MouvementController {
 
