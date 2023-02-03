@@ -82,7 +82,6 @@ public class EnchereServiceImpl implements EnchereService {
         return enchereRepository.findById(id).get();
     }
 
-    @Override
     @Transactional(rollbackOn = Exception.class)
     public Enchere save(Produit produit, Enchere enchere, String[] photos) throws Exception {
 //        Historique historique = new Historique();

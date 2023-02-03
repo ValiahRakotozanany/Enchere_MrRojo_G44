@@ -19,7 +19,7 @@ public interface EnchereService {
     public List<Enchere> findByUtilisateur(Integer idutilisateur);
     public List<Produit> findByProduit (Integer idproduit);
     public Enchere findById (Integer id);
-    public Enchere save (Enchere enchere) throws Exception ;
+    // public Enchere save (Enchere enchere) throws Exception ;
     public List<Enchere> rechercheAvance (Enchere echere); public void updateCommsion(double pourcentage);
     public List<Enchere> getEnchereActif ();
     public Commission comission();
