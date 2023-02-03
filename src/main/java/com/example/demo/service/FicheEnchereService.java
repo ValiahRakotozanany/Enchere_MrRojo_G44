@@ -17,4 +17,5 @@ public interface FicheEnchereService {
     public List<FicheEchere> getDetails (Integer idenchere);
     public List<FicheEchere> getDetailsFiche (Integer idenchere);
     void updateEtatEnchere(int idenchere);
+    public List<FicheEchere> findByEncher(int idenchere);
 }

@@ -46,5 +46,10 @@ public class FicheEnchereServiceImpl implements FicheEnchereService {
     public List<FicheEchere> getDetailsFiche(Integer idenchere) {
        return ficheenchererepository.getDetailsFiche(idenchere);
     }
+
+    @Override
+    public List<FicheEchere> findByEncher(int idenchere) {
+       return ficheenchererepository.finfByEnchere(idenchere);
+    }
     
 }

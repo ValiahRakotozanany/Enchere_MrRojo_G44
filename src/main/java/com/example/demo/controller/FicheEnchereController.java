@@ -62,6 +62,15 @@ public class FicheEnchereController {
         return new ResponseEntity(resultat, HttpStatus.OK);
     }
 
+    
+    @GetMapping("{id}/detailsenchere")
+    public ResponseEntity getDetailsenchere(@PathVariable("id") Integer id, @RequestHeader String token, HttpServletRequest request) throws Exception {
+        tokenutilisateur.verifierTokenClient(token, request);
+        HashMap<String, Object> resultat = new HashMap<>();
+        resultat.put("data", ficheEnchereService.getDetailsFiche(id));
+        return new ResponseEntity(resultat, HttpStatus.OK);
+    }
+
     @Autowired
     CategorieService categorieservice;
 

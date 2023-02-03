@@ -73,7 +73,7 @@ public class EnchereController {
         try {
 //            resultat.put("data",enchereservice.save((Produit)objects[0],(Enchere)objects[1],(String[])objects[2]));
             object.getEnchere().setDatetime(new Timestamp(System.currentTimeMillis()));
-            resultat.put("data", enchereservice.save(object.getProduit(), object.getEnchere(), object.getPhotos()));
+            resultat.put("data", enchereservice.save( object.getEnchere()));
         } catch (Exception e) {
             Error error = new Error();
             error.setCode("404");
@@ -96,8 +96,8 @@ public class EnchereController {
         List<Enchere> list = enchereservice.getEnchereActif();
     }*/
     @GetMapping
-    public ResponseEntity liste(@RequestHeader String token, HttpServletRequest request) throws Exception {
-        tokenutilisateur.verifierTokenClient(token, request);
+    public ResponseEntity liste(HttpServletRequest request) throws Exception {
+     //   tokenutilisateur.verifierTokenClient(token, request);
         HashMap<String, Object> resultat = new HashMap<>();
         List<Enchere> list = enchereservice.findAll();
         resultat.put("data", list);
