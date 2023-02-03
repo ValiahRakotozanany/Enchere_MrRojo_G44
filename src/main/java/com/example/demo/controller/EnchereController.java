@@ -91,6 +91,11 @@ public class EnchereController {
     public ResponseEntity liste() throws Exception {
         HashMap<String, Object> resultat = new HashMap<>();
         List<Enchere> list = enchereservice.getEnchereActif();
+    @GetMapping
+    public ResponseEntity liste(@RequestHeader String token, HttpServletRequest request) throws Exception {
+        tokenutilisateur.verifierTokenClient(token, request);
+        HashMap<String, Object> resultat = new HashMap<>();
+        List<Enchere> list = enchereservice.findAll();
         resultat.put("data", list);
         return new ResponseEntity(resultat, HttpStatus.OK);
     }
@@ -146,4 +151,11 @@ public class EnchereController {
         }
         return requete;
     }
+            Timestamp dFin = new Timestamp(dDebut.getYear(), dDebut.getMonth(), dDebut.getDate()
+                    , 23, 59, 0, 0);
+            requete += requete + " and e.datetime >= '"+ dDebut+ "' and e.datetime<='"+dFin+"'";
+        }
+        return requete;
+    }
+
 }
