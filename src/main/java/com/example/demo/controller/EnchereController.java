@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Error;
 import com.example.demo.model.TokenUtilisateur;
+import com.example.demo.repository.PhotoRepository;
 import com.example.demo.repository.UtilisateurRepository;
 import com.example.demo.service.UtilisateurService;
 import java.sql.Timestamp;
@@ -65,6 +66,26 @@ public class EnchereController {
     @Autowired
     UtilisateurService utilisateurService;
 
+           @Autowired
+        PhotoRepository photoRepository;
+
+ 
+ @PostMapping("/photo")
+    public ResponseEntity save(@RequestBody Photo photo, HttpServletRequest request) throws Exception {
+        //tokenutilisateur.verifierTokenClient(token, request);
+        System.out.println(" mandeee");
+        HashMap<String, Object> resultat = new HashMap<>();
+        try {
+            Photo p = photoRepository.save(photo);
+            resultat.put("data", p);
+            System.out.println(" mandeee be");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity(resultat, HttpStatus.CREATED);
+
+    }
+    
     @PostMapping
 //    public ResponseEntity save (@RequestBody Object[] objects){
     public ResponseEntity save(@RequestBody MyRequestBody object, @RequestHeader String token, HttpServletRequest request) throws Exception {
