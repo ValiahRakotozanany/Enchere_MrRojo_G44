@@ -18,6 +18,9 @@ import com.example.demo.repository.ProduitRepository;
 import com.example.demo.repository.UtilisateurRepository;
 import com.example.demo.service.EnchereService;
 import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,9 @@ import org.springframework.stereotype.Service;
 
 public class EnchereServiceImpl implements EnchereService {
 
+    @PersistenceContext
+    EntityManager entitymanger;
+    
     @Autowired
     EnchereRepository enchereRepository;
     
@@ -108,8 +114,32 @@ public class EnchereServiceImpl implements EnchereService {
     }
     
     @Override
-    public List<Enchere> rechercheAvance(Enchere echere) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Enchere> rechercheAvance(Enchere enchere) {
+        String sql = " select * from enchere e join produit p on e.idproduit=p.id where 0=0";
+        if (enchere.getDatetime() != null) {
+            sql += " and datetime="+enchere.getDatetime();
+        }
+        if (enchere.getPrixminimal() != null) {
+            sql += " and prixminimal = "+enchere.getPrixminimal();
+        }
+        if (enchere.getEtat() != null) {
+            sql += "and etat ="+enchere.getEtat();
+        }
+        if (enchere.getDescription() != null) {
+            sql += " and description like '%"+enchere.getDescription()+"%' ";
+        }
+        if (enchere.getProduit() != null) {
+            if (enchere.getProduit().getCategorie() != null) {
+                if (enchere.getProduit().getCategorie().getId() != null) {
+                    sql += " and idcategorie ="+enchere.getProduit().getCategorie().getId();
+                }
+            }
+        }
+        System.out.println("sql == "+sql);
+        Query query = entitymanger.createNativeQuery(sql,Enchere.class);
+        
+        List<Enchere> resultat = (List<Enchere>)query.getResultList();
+        return resultat;
     }
 
     public void updateCommsion(double pourcentage) {

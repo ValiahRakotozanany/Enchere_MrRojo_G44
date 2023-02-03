@@ -20,6 +20,7 @@ public interface UtilisateurService {
     public Utilisateur saveUtilisateur (Utilisateur admin);
     public Utilisateur login (String email,String mdp);
     public double getsolde(int idutilisateur);
+    public Double getSoldeBase(int idutilisateur);
     public Utilisateur save (Utilisateur admin);
     public Utilisateur findById(Integer id);
 }

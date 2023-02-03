@@ -49,6 +49,11 @@ public class UtilisateurServiceImpl implements UtilisateurService
         return vmvt - vfiche;
     }
     
+    @Override
+    public Double getSoldeBase (int idutilisateur) {
+        return utilisateurRepository.getSolde(idutilisateur);
+    }
+    
 
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
